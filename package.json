@@ -16,6 +16,7 @@
   "exports": "./lib/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
+    "aigc-detector-dev": "./bin/dev.js",
     "aigc-detector": "./bin/run.js"
   },
   "files": [
@@ -37,13 +38,7 @@
       "@oclif/plugin-help",
       "@oclif/plugin-not-found",
       "@oclif/plugin-version"
-    ],
-    "topicSeparator": " ",
-    "topics": {
-      "hello": {
-        "description": "Say hello to the world and others"
-      }
-    }
+    ]
   },
   "dependencies": {
     "@oclif/core": "^3.26.4",
