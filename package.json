@@ -27,7 +27,7 @@
     "build": "rm -rf dist && tsc -b",
     "prepack": "pnpm run build && oclif manifest",
     "postpack": "rm -f oclif.manifest.json",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "oclif": {
     "bin": "aigc-detector",
@@ -35,7 +35,8 @@
     "dirname": "aigc-detector",
     "plugins": [
       "@oclif/plugin-help",
-      "@oclif/plugin-plugins"
+      "@oclif/plugin-not-found",
+      "@oclif/plugin-version"
     ],
     "topicSeparator": " ",
     "topics": {
@@ -47,7 +48,8 @@
   "dependencies": {
     "@oclif/core": "^3.26.4",
     "@oclif/plugin-help": "^6.0.21",
-    "@oclif/plugin-plugins": "^5.0.13"
+    "@oclif/plugin-not-found": "^3.1.6",
+    "@oclif/plugin-version": "^2.0.17"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.2.2",
