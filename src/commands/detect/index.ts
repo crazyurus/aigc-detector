@@ -1,6 +1,8 @@
-import { Args, Command, Flags } from '@oclif/core';
+import { Args, Flags } from '@oclif/core';
 
-class DetectCommand extends Command {
+import BaseCommand from '../../extends/command.js';
+
+class DetectCommand extends BaseCommand {
   static args = {
     content: Args.string({
       description: 'Detected content'

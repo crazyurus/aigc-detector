@@ -1,6 +1,10 @@
-import { Command, Flags } from '@oclif/core';
+import { Flags } from '@oclif/core';
 
-class ConfigCommand extends Command {
+import BaseCommand from '../../extends/command.js';
+import { getAvailablePlatforms, getPlatform, type Platform } from '../../platform/index.js';
+import { maskKey } from './utils.js';
+
+class ConfigCommand extends BaseCommand {
   static args = {};
 
   static description = 'Configure parameters of the LLM platform';
@@ -17,14 +21,41 @@ class ConfigCommand extends Command {
       char: 'p',
       description: 'Platform that provides LLM',
       multiple: false,
-      options: ['openai', 'moonshot']
+      options: getAvailablePlatforms()
     })
   };
 
   async run(): Promise<void> {
     const { flags } = await this.parse(ConfigCommand);
+    const hasFlag = Object.keys(flags).length > 0;
 
-    this.log(JSON.stringify(flags));
+    if (hasFlag) {
+      if (flags.platform) {
+        await this.configManager.setItem('platform', flags.platform);
+      }
+
+      if (flags.apiKey) {
+        await this.configManager.setItem('apiKey', flags.apiKey);
+      }
+
+      this.success('Configuration successful');
+    } else {
+      const config = await this.configManager.getAll();
+
+      if (Object.keys(config).length > 0) {
+        if (config.platform) {
+          const platform = getPlatform(config.platform as unknown as Platform);
+
+          this.log('Platform: ' + platform.name);
+        }
+
+        if (config.apiKey) {
+          this.log('API Key: ' + maskKey(config.apiKey));
+        }
+      } else {
+        this.showHelp();
+      }
+    }
   }
 }
 
