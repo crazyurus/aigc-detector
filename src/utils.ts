@@ -10,11 +10,11 @@ export function getDetectResult(result: string): {
   let probability = '';
   let reason = '';
 
-  for (const [index, line] of lines.entries()) {
-    const item = line.split(':');
+  for (const line of lines) {
+    const [label, value] = line.split(':');
 
-    if (index === 0) probability = item[1].trim();
-    else reason = item[1].trim();
+    if (label.includes('probability')) probability = value.trim();
+    if (label.includes('reason')) reason = value.trim();
   }
 
   return {

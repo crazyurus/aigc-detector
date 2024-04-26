@@ -43,6 +43,21 @@ class DetectCommand extends BaseCommand {
       flags.content = args.content;
     }
 
+    if (flags.file) {
+      flags.content = await this.fileManager.readFile(flags.file);
+    }
+
+    if (flags.url) {
+      const response = await fetch(flags.url, {
+        headers: {
+          'User-Agent': this.config.bin + '/' + this.config.version
+        },
+        method: 'GET'
+      });
+
+      flags.content = await response.text();
+    }
+
     if (Object.keys(flags).length > 0) {
       const config = await this.configManager.getAll();
 
@@ -54,7 +69,7 @@ class DetectCommand extends BaseCommand {
             baseURL: platform.baseURL
           },
           model: platform.model,
-          temperature: 0.9
+          temperature: 0.7
         });
         const prompt = ChatPromptTemplate.fromMessages([
           ['system', PROMPT],

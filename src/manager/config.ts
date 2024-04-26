@@ -1,6 +1,6 @@
 import path from 'node:path';
 
-import FileSystem from './file-system.js';
+import FileManager from './file.js';
 import encryptMiddleware from './middlewares/encrypt.js';
 
 interface Config {
@@ -13,17 +13,17 @@ class ConfigManager {
 
   private configPath: string;
 
-  private fileSystem: FileSystem;
+  private fileManager: FileManager;
 
   constructor(configDirectory: string) {
     this.configDirectory = configDirectory;
     this.configPath = path.join(configDirectory, 'settings');
-    this.fileSystem = new FileSystem([encryptMiddleware]);
+    this.fileManager = new FileManager([encryptMiddleware]);
   }
 
   async getAll(): Promise<Partial<Config>> {
     try {
-      const config = await this.fileSystem.readFile(this.configPath);
+      const config = await this.fileManager.readFile(this.configPath);
 
       return JSON.parse(config.toString());
     } catch {
@@ -42,11 +42,11 @@ class ConfigManager {
 
     config[key] = value;
 
-    if (!(await this.fileSystem.isFileExist(this.configDirectory))) {
-      await this.fileSystem.makeDirectory(this.configDirectory);
+    if (!(await this.fileManager.isFileExist(this.configDirectory))) {
+      await this.fileManager.makeDirectory(this.configDirectory);
     }
 
-    await this.fileSystem.writeFile(this.configPath, JSON.stringify(config, null, 2));
+    await this.fileManager.writeFile(this.configPath, JSON.stringify(config, null, 2));
   }
 }
 

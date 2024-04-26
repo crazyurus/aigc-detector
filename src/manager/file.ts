@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 
 import type { Middleware } from './middlewares/types.js';
 
-class FileSystem {
+class FileManager {
   private middlewares: Middleware[] = [];
 
   constructor(middlewares?: Middleware[]) {
@@ -47,4 +47,4 @@ class FileSystem {
   }
 }
 
-export default FileSystem;
+export default FileManager;
