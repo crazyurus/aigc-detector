@@ -1,8 +1,8 @@
 import { Flags } from '@oclif/core';
 
-import BaseCommand from '../../extends/command.js';
-import { getAvailablePlatforms, getPlatform, type Platform } from '../../platform/index.js';
-import { maskKey } from '../../utils.js';
+import BaseCommand from '../extends/command.js';
+import { getAvailablePlatforms, getPlatform, type Platform } from '../platform/index.js';
+import { maskKey } from '../utils.js';
 
 class ConfigCommand extends BaseCommand {
   static args = {};

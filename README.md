@@ -41,7 +41,7 @@ $ aigc-detector help
 
 ## Develop
 
-You need to execute 'npm link' to create a local debugging cli tool, and then you can use `aigc-detector-dev` for debugging. For example:
+You need to execute `npm link` to create a local debugging cli tool, and then you can use `aigc-detector-dev` for debugging. For example:
 
 ```sh
 $ aigc-detector-dev config
