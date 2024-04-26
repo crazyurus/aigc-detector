@@ -24,7 +24,7 @@ You can log in to the above platform to apply for an API Key.
 Then, you need to configure the API Key you have applied for in the tool. For example:
 
 ```sh
-$ aigc-detector config -p moonshot -k pl_f23***********************73f4ee
+$ aigc-detector config -p moonshot -k sk-GQz***************************************8UnlrT
 ```
 
 Finally, tell us the content that needs to be detected and we can proceed.

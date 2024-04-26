@@ -11,8 +11,8 @@ const platformMap = {
   [Platform.OpenAI]: OpenAI
 };
 
-export function getPlatform<K extends Platform>(platform: K): (typeof platformMap)[K] {
-  return platformMap[platform];
+export function getPlatform(platform: Platform): Moonshot | OpenAI {
+  return new platformMap[platform]();
 }
 
 export function getAvailablePlatforms(): string[] {

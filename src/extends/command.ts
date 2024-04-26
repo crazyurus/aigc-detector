@@ -12,6 +12,10 @@ abstract class BaseCommand extends Command {
     this.configManager = new ConfigManager(this.config.configDir);
   }
 
+  protected list(label: string, content: string): void {
+    this.log(chalk.cyan(label) + ': ' + content);
+  }
+
   protected async showHelp(): Promise<void> {
     const Help = await loadHelpClass(this.config);
     const help = new Help(this.config);

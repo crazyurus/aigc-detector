@@ -2,7 +2,7 @@ import { Flags } from '@oclif/core';
 
 import BaseCommand from '../../extends/command.js';
 import { getAvailablePlatforms, getPlatform, type Platform } from '../../platform/index.js';
-import { maskKey } from './utils.js';
+import { maskKey } from '../../utils.js';
 
 class ConfigCommand extends BaseCommand {
   static args = {};
@@ -46,11 +46,11 @@ class ConfigCommand extends BaseCommand {
         if (config.platform) {
           const platform = getPlatform(config.platform as unknown as Platform);
 
-          this.log('Platform: ' + platform.name);
+          this.list('Platform', platform.name);
         }
 
         if (config.apiKey) {
-          this.log('API Key: ' + maskKey(config.apiKey));
+          this.list('API Key', maskKey(config.apiKey));
         }
       } else {
         this.showHelp();
