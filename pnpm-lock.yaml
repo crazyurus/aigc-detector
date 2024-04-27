@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@langchain/community':
+        specifier: ^0.0.53
+        version: 0.0.53(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(lodash@4.17.21)
       '@langchain/core':
         specifier: ^0.1.60
         version: 0.1.60
@@ -518,8 +521,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@langchain/community@0.0.52':
-    resolution: {integrity: sha512-L+IMAAaLNP7++4HhdvuVJegc8bdw8WP77Jvp98YcySFZTZWH1yasSQSlFn3jgBk+3xLBsudpTZuttKTrZ/TtVQ==}
+  '@langchain/community@0.0.53':
+    resolution: {integrity: sha512-iFqZPt4MRssGYsQoKSXWJQaYTZCC7WNuilp2JCCs3wKmJK3l6mR0eV+PDrnT+TaDHUVxt/b0rwgM0sOiy0j2jA==}
     engines: {node: '>=18'}
     peerDependencies:
       '@aws-crypto/sha256-js': ^5.0.0
@@ -549,7 +552,7 @@ packages:
       '@pinecone-database/pinecone': '*'
       '@planetscale/database': ^1.8.0
       '@premai/prem-sdk': ^0.3.25
-      '@qdrant/js-client-rest': ^1.2.0
+      '@qdrant/js-client-rest': ^1.8.2
       '@raycast/api': ^1.55.2
       '@rockset/client': ^0.9.1
       '@smithy/eventstream-codec': ^2.0.5
@@ -4504,7 +4507,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  '@langchain/community@0.0.52(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(lodash@4.17.21)':
+  '@langchain/community@0.0.53(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(lodash@4.17.21)':
     dependencies:
       '@langchain/core': 0.1.60
       '@langchain/openai': 0.0.28
@@ -6465,7 +6468,7 @@ snapshots:
   langchain@0.1.36(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(fast-xml-parser@4.2.5)(ignore@5.3.1)(lodash@4.17.21):
     dependencies:
       '@anthropic-ai/sdk': 0.9.1
-      '@langchain/community': 0.0.52(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(lodash@4.17.21)
+      '@langchain/community': 0.0.53(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(lodash@4.17.21)
       '@langchain/core': 0.1.60
       '@langchain/openai': 0.0.28
       '@langchain/textsplitters': 0.0.0

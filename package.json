@@ -42,6 +42,7 @@
     ]
   },
   "dependencies": {
+    "@langchain/community": "^0.0.53",
     "@langchain/core": "^0.1.60",
     "@langchain/openai": "^0.0.28",
     "@oclif/core": "^3.26.4",
