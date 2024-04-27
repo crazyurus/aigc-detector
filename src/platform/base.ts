@@ -8,15 +8,11 @@ import { PROMPT } from '../const';
 abstract class Platform {
   protected temperature = 0.7;
 
-  get baseURL(): string {
-    return `https://${this.server}/v1`;
-  }
-
   protected getChatModel(apiKey?: string): BaseLanguageModel {
     return new ChatOpenAI({
       apiKey,
       configuration: {
-        baseURL: this.baseURL
+        baseURL: `https://${this.server}/v1`
       },
       frequencyPenalty: 1,
       model: this.model,

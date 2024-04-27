@@ -20,6 +20,20 @@ abstract class BaseCommand extends Command {
     this.networkManager = new NetworkManager(this.config);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  protected async catch(error: any) {
+    process.exitCode = process.exitCode ?? error.exitCode ?? 1;
+
+    if (this.jsonEnabled()) {
+      this.logJson(this.toErrorJson(error));
+    } else {
+      this.error(error.message, {
+        code: error.exitCode,
+        exit: process.exitCode
+      });
+    }
+  }
+
   protected list(label: string, content: string): void {
     this.log(chalk.cyan(label) + ': ' + content);
   }
