@@ -4,10 +4,10 @@ import { Args, Flags } from '@oclif/core';
 import chalk from 'chalk';
 import ora from 'ora';
 
-import { PROMPT } from '../const.js';
-import BaseCommand from '../extends/command.js';
-import { getPlatform, type Platform } from '../platform/index.js';
-import { getDetectResult } from '../utils.js';
+import { PROMPT } from '../const';
+import BaseCommand from '../extends/command';
+import { getPlatform, type Platform } from '../platform';
+import { getDetectResult } from '../utils';
 
 class DetectCommand extends BaseCommand {
   static args = {

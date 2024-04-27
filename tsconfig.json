@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "module": "NodeNext",
+    "module": "ESNext",
     "outDir": "dist",
     "rootDir": "src",
     "strict": true,
-    "target": "es2022",
-    "moduleResolution": "NodeNext"
+    "target": "ESNext",
+    "moduleResolution": "Bundler"
   },
   "include": ["./src/**/*"],
   "ts-node": {

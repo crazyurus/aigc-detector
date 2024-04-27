@@ -1,6 +1,6 @@
 import crypto from 'node:crypto';
 
-import type { Middleware } from './types.js';
+import type { Middleware } from './types';
 
 const SECRET_KEY = 'aigc-detector';
 const ENCRYPT_METHOD = 'aes-256-cbc';

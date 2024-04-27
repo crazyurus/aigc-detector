@@ -1,5 +1,5 @@
-import Moonshot from './moonshot.js';
-import OpenAI from './openai.js';
+import Moonshot from './moonshot';
+import OpenAI from './openai';
 
 export enum Platform {
   Moonshot = 'moonshot',

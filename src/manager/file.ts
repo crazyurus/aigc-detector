@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 
-import type { Middleware } from './middlewares/types.js';
+import type { Middleware } from './middlewares/types';
 
 class FileManager {
   private middlewares: Middleware[] = [];

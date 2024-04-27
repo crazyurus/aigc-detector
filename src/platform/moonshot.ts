@@ -1,4 +1,4 @@
-import Platform from './base.js';
+import Platform from './base';
 
 class Moonshot extends Platform {
   public model = 'moonshot-v1-8k';

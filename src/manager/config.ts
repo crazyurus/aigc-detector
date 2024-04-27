@@ -1,7 +1,7 @@
 import path from 'node:path';
 
-import FileManager from './file.js';
-import encryptMiddleware from './middlewares/encrypt.js';
+import FileManager from './file';
+import encryptMiddleware from './middlewares/encrypt';
 
 interface Config {
   apiKey: string;

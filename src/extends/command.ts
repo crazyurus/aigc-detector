@@ -1,8 +1,8 @@
 import { Command, loadHelpClass, type Config } from '@oclif/core';
 import chalk from 'chalk';
 
-import ConfigManager from '../manager/config.js';
-import FileManager from '../manager/file.js';
+import ConfigManager from '../manager/config';
+import FileManager from '../manager/file';
 
 abstract class BaseCommand extends Command {
   protected configManager: ConfigManager;

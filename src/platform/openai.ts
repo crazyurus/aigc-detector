@@ -1,4 +1,4 @@
-import Platform from './base.js';
+import Platform from './base';
 
 class OpenAI extends Platform {
   public model = 'gpt-3.5-turbo';
