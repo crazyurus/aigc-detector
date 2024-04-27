@@ -22,6 +22,20 @@ class ConfigManager {
   }
 
   async getAll(): Promise<Partial<Config>> {
+    const result: Partial<Config> = {};
+
+    if (process.env.AIGC_DETECTOR_API_KEY) {
+      result.apiKey = process.env.AIGC_DETECTOR_API_KEY;
+    }
+
+    if (process.env.AIGC_DETECTOR_PLATFORM) {
+      result.platform = process.env.AIGC_DETECTOR_PLATFORM;
+    }
+
+    if (Object.keys(result).length > 0) {
+      return result;
+    }
+
     try {
       const config = await this.fileManager.readFile(this.configPath);
 
