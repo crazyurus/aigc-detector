@@ -18,16 +18,21 @@ abstract class Platform {
       configuration: {
         baseURL: this.baseURL
       },
+      frequencyPenalty: 1,
       model: this.model,
       temperature: this.temperature
     });
   }
 
-  public async invoke(content?: string, apiKey?: string): Promise<string> {
-    const prompt = ChatPromptTemplate.fromMessages([
+  protected getPrompt(): ChatPromptTemplate {
+    return ChatPromptTemplate.fromMessages([
       SystemMessagePromptTemplate.fromTemplate(PROMPT),
       HumanMessagePromptTemplate.fromTemplate('Here is what needs to be evaluated: \n{content}')
     ]);
+  }
+
+  public async invoke(content?: string, apiKey?: string): Promise<string> {
+    const prompt = this.getPrompt();
     const chain = new LLMChain({
       llm: this.getChatModel(apiKey),
       prompt
