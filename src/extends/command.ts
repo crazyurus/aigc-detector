@@ -3,17 +3,21 @@ import chalk from 'chalk';
 
 import ConfigManager from '../manager/config';
 import FileManager from '../manager/file';
+import NetworkManager from '../manager/network';
 
 abstract class BaseCommand extends Command {
   protected configManager: ConfigManager;
 
   protected fileManager: FileManager;
 
+  protected networkManager: NetworkManager;
+
   constructor(argv: string[], config: Config) {
     super(argv, config);
 
     this.configManager = new ConfigManager(this.config.configDir);
     this.fileManager = new FileManager();
+    this.networkManager = new NetworkManager(this.config);
   }
 
   protected list(label: string, content: string): void {

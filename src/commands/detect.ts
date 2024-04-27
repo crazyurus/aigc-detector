@@ -48,14 +48,7 @@ class DetectCommand extends BaseCommand {
     }
 
     if (flags.url) {
-      const response = await fetch(flags.url, {
-        headers: {
-          'User-Agent': this.config.bin + '/' + this.config.version
-        },
-        method: 'GET'
-      });
-
-      flags.content = await response.text();
+      flags.content = await this.networkManager.httpRequest(flags.url);
     }
 
     if (Object.keys(flags).length > 0) {
