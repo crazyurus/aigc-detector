@@ -84,10 +84,11 @@ class DetectCommand extends BaseCommand {
         this.list('Probability', percent > 50 ? chalk.red(probability) : chalk.green(probability));
         this.list('Reason', reason);
       } else {
-        this.warn('Please complete the configuration first');
-        this.log('Run ' + chalk.yellow(this.id + ' config --help') + ' to view details');
+        spinner.fail('Please complete the configuration first');
+        this.log('Run ' + chalk.yellow(this.id + ' config') + ' to complete the configuration');
       }
     } else {
+      spinner.stop();
       this.showHelp();
     }
   }

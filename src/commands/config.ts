@@ -1,4 +1,5 @@
 import { Flags } from '@oclif/core';
+import inquirer from 'inquirer';
 
 import BaseCommand from '../extends/command';
 import { getAvailablePlatforms, getPlatform, type Platform } from '../platform';
@@ -53,7 +54,30 @@ class ConfigCommand extends BaseCommand {
           this.list('API Key', maskKey(config.apiKey));
         }
       } else {
-        this.showHelp();
+        const answer = await inquirer.prompt([
+          {
+            choices: getAvailablePlatforms().map((platform) => ({
+              name: getPlatform(platform as unknown as Platform).name,
+              value: platform
+            })),
+            message: ConfigCommand.flags.platform.description,
+            name: 'platform',
+            type: 'list'
+          },
+          {
+            message: ConfigCommand.flags.apiKey.description,
+            name: 'apiKey',
+            type: 'input',
+            validate(input: string): boolean {
+              return Boolean(input.trim());
+            }
+          }
+        ]);
+
+        await this.configManager.setItem('platform', answer.platform);
+        await this.configManager.setItem('apiKey', answer.apiKey);
+
+        this.success('Configuration successful');
       }
     }
   }
