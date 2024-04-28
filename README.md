@@ -18,8 +18,9 @@ First, you need to configure the large model platform and its API Key that the t
 
 - [BaiChuan](https://platform.baichuan-ai.com/)
 - [MiniMax](https://www.minimaxi.com/)
-- [OpenAI](https://platform.openai.com/)
 - [Moonshot](https://platform.moonshot.cn/)
+- [OpenAI](https://platform.openai.com/)
+- [Zhipu](https://open.bigmodel.cn/)
 
 You can log in to the above platform to apply for an API Key.
 
