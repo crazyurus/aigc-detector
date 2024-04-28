@@ -1,4 +1,4 @@
-#!/usr/bin/env node --no-warnings=ExperimentalWarning --experimental-specifier-resolution=node
+#!/usr/bin/env node
 
 import { execute } from '@oclif/core'
 
