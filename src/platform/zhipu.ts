@@ -6,7 +6,7 @@ import Platform from './base';
 class ZhiPu extends Platform {
   protected model = 'glm-4';
 
-  public name = 'ZhiPu';
+  public name = '智谱清言';
 
   protected server = 'open.bigmodel.cn';
 

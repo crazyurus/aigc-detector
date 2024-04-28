@@ -6,7 +6,7 @@ import Platform from './base';
 class BaiChuan extends Platform {
   protected model = 'Baichuan2-Turbo-192k';
 
-  public name = 'BaiChuan';
+  public name = '百川智能';
 
   protected server = 'api.baichuan-ai.com';
 

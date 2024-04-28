@@ -16,11 +16,12 @@ $ npm install aigc-detector -g
 
 First, you need to configure the large model platform and its API Key that the tool depends on. Currently, the following platforms are supported:
 
-- [BaiChuan](https://platform.baichuan-ai.com/)
+- [百川智能](https://platform.baichuan-ai.com/)
 - [MiniMax](https://www.minimaxi.com/)
 - [Moonshot](https://platform.moonshot.cn/)
 - [OpenAI](https://platform.openai.com/)
-- [Zhipu](https://open.bigmodel.cn/)
+- [通义千问](https://dashscope.console.aliyun.com/)
+- [智谱清言](https://open.bigmodel.cn/)
 
 You can log in to the above platform to apply for an API Key.
 
