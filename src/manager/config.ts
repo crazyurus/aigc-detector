@@ -1,12 +1,8 @@
 import path from 'node:path';
 
+import { getEnvConfig, type Config } from '../core/env';
 import FileManager from './file';
 import encryptMiddleware from './middlewares/encrypt';
-
-interface Config {
-  apiKey: string;
-  platform: string;
-}
 
 class ConfigManager {
   private configDirectory: string;
@@ -22,15 +18,7 @@ class ConfigManager {
   }
 
   async getAll(): Promise<Partial<Config>> {
-    const result: Partial<Config> = {};
-
-    if (process.env.AIGC_DETECTOR_API_KEY) {
-      result.apiKey = process.env.AIGC_DETECTOR_API_KEY;
-    }
-
-    if (process.env.AIGC_DETECTOR_PLATFORM) {
-      result.platform = process.env.AIGC_DETECTOR_PLATFORM;
-    }
+    const result = getEnvConfig();
 
     if (Object.keys(result).length > 0) {
       return result;

@@ -2,9 +2,9 @@ import { Args, Flags } from '@oclif/core';
 import chalk from 'chalk';
 import ora from 'ora';
 
+import { AIGC } from '../core';
 import BaseCommand from '../extends/command';
-import { getPlatform, type Platform } from '../platform';
-import { getDetectResult } from '../utils';
+import { type Platform } from '../platform';
 
 class DetectCommand extends BaseCommand {
   static args = {
@@ -52,10 +52,13 @@ class DetectCommand extends BaseCommand {
       const config = await this.configManager.getAll();
 
       if (Object.keys(config).length > 0) {
-        const platform = getPlatform(config.platform as unknown as Platform);
-        const result = await platform.invoke(flags.content, config.apiKey);
-        const { probability, reason } = getDetectResult(result);
-        const percent = Number.parseInt(probability, 10);
+        const detector = new AIGC({
+          apiKey: config.apiKey,
+          platform: config.platform as unknown as Platform
+        });
+        const { probability, reason } = await detector.detect(flags.content!);
+        const percent = probability * 100;
+        const percentText = percent + '%';
 
         if (percent > 50) {
           spinner.fail('This is AI generated content');
@@ -63,7 +66,7 @@ class DetectCommand extends BaseCommand {
           spinner.succeed('This is NOT AI generated content');
         }
 
-        this.list('Probability', percent > 50 ? chalk.red(probability) : chalk.green(probability));
+        this.list('Probability', percent > 50 ? chalk.red(percentText) : chalk.green(percentText));
         this.list('Reason', reason);
       } else {
         spinner.fail('Please complete the configuration first');
