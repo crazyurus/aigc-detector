@@ -1,9 +1,9 @@
 import { Flags } from '@oclif/core';
 import inquirer from 'inquirer';
 
-import { maskKey } from '../core/utils';
+import { maskKey } from '../../core/utils';
+import { getAvailablePlatforms, getPlatform, type Platform } from '../../platform';
 import BaseCommand from '../extends/command';
-import { getAvailablePlatforms, getPlatform, type Platform } from '../platform';
 
 class ConfigCommand extends BaseCommand {
   static args = {};

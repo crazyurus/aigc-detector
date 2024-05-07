@@ -30,7 +30,7 @@
   },
   "oclif": {
     "bin": "aigc-detector",
-    "commands": "./dist/commands",
+    "commands": "./dist/cli/commands",
     "dirname": "aigc-detector",
     "plugins": [
       "@oclif/plugin-help",
