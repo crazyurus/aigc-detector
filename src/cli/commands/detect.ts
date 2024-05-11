@@ -2,8 +2,9 @@ import { Args, Flags } from '@oclif/core';
 import chalk from 'chalk';
 import ora from 'ora';
 
+import type { Platform } from '../../platform';
+
 import { AIGC } from '../../core';
-import { type Platform } from '../../platform';
 import BaseCommand from '../extends/command';
 
 class DetectCommand extends BaseCommand {

@@ -1,3 +1,6 @@
+import type { BaseMessage } from '@langchain/core/messages';
+
+import { PROMPT } from '../const';
 import { getPlatform, type Platform } from '../platform';
 import { getEnvConfig } from './env';
 import { getDetectResult } from './utils';
@@ -19,9 +22,20 @@ export class AIGC {
     this.platform = (env.platform as unknown as Platform) || options.platform;
   }
 
+  public async chat(content: string, messages: BaseMessage[]) {
+    const platform = getPlatform(this.platform);
+    const result = await platform.invoke(
+      'You are a helpful assistant. Answer all questions to the best of your ability.',
+      { content, messages },
+      this.apiKey
+    );
+
+    return result;
+  }
+
   public async detect(content: string): Promise<ReturnType<typeof getDetectResult>> {
     const platform = getPlatform(this.platform);
-    const result = await platform.invoke(content, this.apiKey);
+    const result = await platform.invoke(PROMPT, { content }, this.apiKey);
 
     return getDetectResult(result);
   }

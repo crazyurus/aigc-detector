@@ -42,6 +42,12 @@ Finally, tell us the content that needs to be detected and we can proceed.
 $ aigc-detector detect [CONTENT]
 ```
 
+Also, You can chat with the large model with the following command:
+
+```sh
+$ aigc-detector chat
+```
+
 For more ways to use `aigc-detector`, please refer to the help command.
 
 ```sh

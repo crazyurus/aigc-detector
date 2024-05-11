@@ -1,5 +1,6 @@
+import type { BaseLanguageModel } from '@langchain/core/language_models/base';
+
 import { ChatAlibabaTongyi } from '@langchain/community/chat_models/alibaba_tongyi';
-import { type BaseLanguageModel } from '@langchain/core/language_models/base';
 
 import Platform from './base';
 

@@ -8,15 +8,6 @@ module.exports = {
   bracketSameLine: true,
   useTabs: false,
   plugins: [
-    '@ianvs/prettier-plugin-sort-imports',
     'prettier-plugin-packagejson'
-  ],
-  importOrder: [
-    '<BUILTIN_MODULES>',
-    '<THIRD_PARTY_MODULES>',
-    '',
-    '^@/(.*)$',
-    '',
-    '^[./]'
   ]
 };

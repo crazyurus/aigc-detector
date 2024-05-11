@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@langchain/community':
         specifier: ^0.0.53
-        version: 0.0.53(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(jsonwebtoken@9.0.2)(lodash@4.17.21)
+        version: 0.0.53(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(jsonwebtoken@9.0.2)(lodash@4.17.21)
       '@langchain/core':
         specifier: ^0.1.60
         version: 0.1.60
@@ -43,7 +43,7 @@ importers:
         version: 9.0.2
       langchain:
         specifier: ^0.1.36
-        version: 0.1.36(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(fast-xml-parser@4.2.5)(ignore@5.3.1)(jsonwebtoken@9.0.2)(lodash@4.17.21)
+        version: 0.1.36(@aws-sdk/client-s3@3.556.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(fast-xml-parser@4.2.5)(ignore@5.3.1)(jsonwebtoken@9.0.2)(lodash@4.17.21)
       ora:
         specifier: ^8.0.1
         version: 8.0.1
@@ -57,9 +57,6 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^19.2.2
         version: 19.2.2
-      '@ianvs/prettier-plugin-sort-imports':
-        specifier: ^4.2.1
-        version: 4.2.1(prettier@3.2.5)
       '@oclif/prettier-config':
         specifier: ^0.2.1
         version: 0.2.1
@@ -475,15 +472,6 @@ packages:
 
   '@humanwhocodes/object-schema@2.0.3':
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
-
-  '@ianvs/prettier-plugin-sort-imports@4.2.1':
-    resolution: {integrity: sha512-NKN1LVFWUDGDGr3vt+6Ey3qPeN/163uR1pOPAlkWpgvAqgxQ6kSdUf1F0it8aHUtKRUzEGcK38Wxd07O61d7+Q==}
-    peerDependencies:
-      '@vue/compiler-sfc': 2.7.x || 3.x
-      prettier: 2 || 3
-    peerDependenciesMeta:
-      '@vue/compiler-sfc':
-        optional: true
 
   '@inquirer/confirm@3.1.5':
     resolution: {integrity: sha512-6+dwZrpko5vr5EFEQmUbfBVhtu6IsnB8lQNsLHgO9S9fbfS5J6MuUj+NY0h98pPpYZXEazLR7qzypEDqVzf6aQ==}
@@ -4525,18 +4513,6 @@ snapshots:
 
   '@humanwhocodes/object-schema@2.0.3': {}
 
-  '@ianvs/prettier-plugin-sort-imports@4.2.1(prettier@3.2.5)':
-    dependencies:
-      '@babel/core': 7.24.4
-      '@babel/generator': 7.24.4
-      '@babel/parser': 7.24.4
-      '@babel/traverse': 7.24.1
-      '@babel/types': 7.24.0
-      prettier: 3.2.5
-      semver: 7.6.0
-    transitivePeerDependencies:
-      - supports-color
-
   '@inquirer/confirm@3.1.5':
     dependencies:
       '@inquirer/core': 8.0.1
@@ -4606,7 +4582,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  '@langchain/community@0.0.53(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(jsonwebtoken@9.0.2)(lodash@4.17.21)':
+  '@langchain/community@0.0.53(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(jsonwebtoken@9.0.2)(lodash@4.17.21)':
     dependencies:
       '@langchain/core': 0.1.60
       '@langchain/openai': 0.0.28
@@ -4617,7 +4593,6 @@ snapshots:
       zod: 3.23.4
       zod-to-json-schema: 3.23.0(zod@3.23.4)
     optionalDependencies:
-      '@aws-crypto/sha256-js': 3.0.0
       '@aws-sdk/credential-provider-node': 3.556.0
       '@smithy/eventstream-codec': 2.2.0
       '@smithy/protocol-http': 3.3.0
@@ -6621,10 +6596,10 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  langchain@0.1.36(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/client-s3@3.556.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(fast-xml-parser@4.2.5)(ignore@5.3.1)(jsonwebtoken@9.0.2)(lodash@4.17.21):
+  langchain@0.1.36(@aws-sdk/client-s3@3.556.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(fast-xml-parser@4.2.5)(ignore@5.3.1)(jsonwebtoken@9.0.2)(lodash@4.17.21):
     dependencies:
       '@anthropic-ai/sdk': 0.9.1
-      '@langchain/community': 0.0.53(@aws-crypto/sha256-js@3.0.0)(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(jsonwebtoken@9.0.2)(lodash@4.17.21)
+      '@langchain/community': 0.0.53(@aws-sdk/credential-provider-node@3.556.0)(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(jsonwebtoken@9.0.2)(lodash@4.17.21)
       '@langchain/core': 0.1.60
       '@langchain/openai': 0.0.28
       '@langchain/textsplitters': 0.0.0
@@ -7214,7 +7189,8 @@ snapshots:
     optionalDependencies:
       prettier: 3.2.5
 
-  prettier@3.2.5: {}
+  prettier@3.2.5:
+    optional: true
 
   punycode@2.3.1: {}
 
