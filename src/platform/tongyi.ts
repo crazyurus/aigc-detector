@@ -11,10 +11,11 @@ class TongYi extends Platform {
 
   protected server = 'open.bigmodel.cn';
 
-  protected getChatModel(apiKey?: string): BaseLanguageModel {
+  protected getChatModel(apiKey?: string, streaming = false): BaseLanguageModel {
     return new ChatAlibabaTongyi({
       alibabaApiKey: apiKey,
       model: this.model,
+      streaming,
       temperature: this.temperature
     });
   }

@@ -11,9 +11,10 @@ class ZhiPu extends Platform {
 
   protected server = 'open.bigmodel.cn';
 
-  protected getChatModel(apiKey?: string): BaseLanguageModel {
+  protected getChatModel(apiKey?: string, streaming?: boolean): BaseLanguageModel {
     return new ChatZhipuAI({
       model: this.model,
+      streaming,
       temperature: this.temperature,
       zhipuAIApiKey: apiKey
     });

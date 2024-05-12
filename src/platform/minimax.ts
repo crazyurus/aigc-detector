@@ -11,11 +11,12 @@ class MiniMax extends Platform {
 
   protected server = 'api.minimax.chat';
 
-  protected getChatModel(apiKey?: string): BaseLanguageModel {
+  protected getChatModel(apiKey?: string, streaming = false): BaseLanguageModel {
     return new ChatMinimax({
       minimaxApiKey: apiKey,
       minimaxGroupId: '1782658868262748274',
       model: this.model,
+      streaming,
       temperature: this.temperature
     });
   }

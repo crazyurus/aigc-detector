@@ -4,12 +4,14 @@ import { ChatPromptTemplate, HumanMessagePromptTemplate, SystemMessagePromptTemp
 import { ChatOpenAI } from '@langchain/openai';
 import { LLMChain } from 'langchain/chains';
 
+import Stream from '../core/stream';
+
 type InvokeParameter = Parameters<InstanceType<typeof LLMChain>['invoke']>[0];
 
 abstract class Platform {
   protected temperature = 0.7;
 
-  protected getChatModel(apiKey?: string): BaseLanguageModel {
+  protected getChatModel(apiKey?: string, streaming = false): BaseLanguageModel {
     return new ChatOpenAI({
       apiKey,
       configuration: {
@@ -17,6 +19,7 @@ abstract class Platform {
       },
       frequencyPenalty: 1,
       model: this.model,
+      streaming,
       temperature: this.temperature
     });
   }
@@ -37,6 +40,31 @@ abstract class Platform {
     const result = await chain.invoke(params);
 
     return result.text;
+  }
+
+  public stream(prompt: string, params: InvokeParameter, apiKey?: string): Stream {
+    const promptTemplate = this.getPrompt(prompt);
+    const chain = new LLMChain({
+      llm: this.getChatModel(apiKey, true),
+      prompt: promptTemplate
+    });
+    const stream = new Stream();
+
+    chain
+      .invoke(params, {
+        callbacks: [
+          {
+            handleLLMNewToken(token: string) {
+              stream.write(token);
+            }
+          }
+        ]
+      })
+      .then(() => {
+        stream.destroy();
+      });
+
+    return stream;
   }
 
   protected abstract model: string;

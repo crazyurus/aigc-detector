@@ -1,5 +1,7 @@
 import type { BaseMessage } from '@langchain/core/messages';
 
+import type Stream from './stream';
+
 import { PROMPT } from '../const';
 import { getPlatform, type Platform } from '../platform';
 import { getEnvConfig } from './env';
@@ -22,15 +24,14 @@ export class AIGC {
     this.platform = (env.platform as unknown as Platform) || options.platform;
   }
 
-  public async chat(content: string, messages: BaseMessage[]) {
+  public chat(content: string, messages: BaseMessage[]): Stream {
     const platform = getPlatform(this.platform);
-    const result = await platform.invoke(
+
+    return platform.stream(
       'You are a helpful assistant. Answer all questions to the best of your ability.',
       { content, messages },
       this.apiKey
     );
-
-    return result;
   }
 
   public async detect(content: string): Promise<ReturnType<typeof getDetectResult>> {

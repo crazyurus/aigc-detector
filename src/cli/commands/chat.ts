@@ -42,8 +42,6 @@ class ChatCommand extends BaseCommand {
 
   static flags = {};
 
-  private lastMessage = 'How can I help you today?';
-
   private messages = new ChatMessageHistory();
 
   async run(): Promise<void> {
@@ -54,16 +52,25 @@ class ChatCommand extends BaseCommand {
         apiKey: config.apiKey,
         platform: config.platform as unknown as Platform
       });
-      const userDisplay = this.getDisplayContent(PromptRole.USER);
+      const aiDisplay = this.getDisplayContent(PromptRole.AI);
+      let lastMessage = 'How can I help you today?';
+
+      process.stdout.write(aiDisplay + lastMessage + '\n');
 
       // eslint-disable-next-line no-constant-condition
       while (true) {
-        const aiMessage = await this.addMessage(PromptRole.AI, this.lastMessage);
-        const userMessage = await this.getUserMessage(aiMessage + `\n${userDisplay}`);
-        const answer = await detector.chat(userMessage, await this.messages.getMessages());
+        const userMessage = await this.getUserMessage();
+        const stream = detector.chat(userMessage, await this.messages.getMessages());
+
+        process.stdout.write(aiDisplay);
+        stream.pipe(process.stdout);
+
+        lastMessage = await stream.getData();
+
+        process.stdout.write('\n');
 
         await this.addMessage(PromptRole.USER, userMessage);
-        this.lastMessage = answer;
+        await this.addMessage(PromptRole.AI, lastMessage);
       }
     } else {
       this.showHelp();
@@ -84,9 +91,11 @@ class ChatCommand extends BaseCommand {
     return chalk[roleDisplay.color](`[${roleDisplay.name}] `);
   }
 
-  private getUserMessage(aiMessage: string): Promise<string> {
+  private getUserMessage(): Promise<string> {
+    const userDisplay = this.getDisplayContent(PromptRole.USER);
+
     return new Promise<string>((resolve) => {
-      reader.question(aiMessage, resolve);
+      reader.question(userDisplay, resolve);
     });
   }
 }
