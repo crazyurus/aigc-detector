@@ -23,14 +23,24 @@ class ConfigCommand extends BaseCommand {
       description: 'Platform that provides LLM',
       multiple: false,
       options: getAvailablePlatforms()
+    }),
+    reset: Flags.boolean({
+      char: 'r',
+      default: false,
+      description: 'Reset configuration'
     })
   };
 
   async run(): Promise<void> {
     const { flags } = await this.parse(ConfigCommand);
-    const hasFlag = Object.keys(flags).length > 0;
+    const { reset, ...restFlags } = flags;
+    const hasFlag = Object.keys(restFlags).length > 0;
 
-    if (hasFlag) {
+    if (reset) {
+      this.warn('Existing configuration will be overwritten');
+
+      await this.showInquirer();
+    } else if (hasFlag) {
       if (flags.platform) {
         await this.configManager.setItem('platform', flags.platform);
       }
@@ -54,32 +64,36 @@ class ConfigCommand extends BaseCommand {
           this.list('API Key', maskKey(config.apiKey));
         }
       } else {
-        const answer = await inquirer.prompt([
-          {
-            choices: getAvailablePlatforms().map((platform) => ({
-              name: getPlatform(platform as unknown as Platform).name,
-              value: platform
-            })),
-            message: ConfigCommand.flags.platform.description,
-            name: 'platform',
-            type: 'list'
-          },
-          {
-            message: ConfigCommand.flags.apiKey.description,
-            name: 'apiKey',
-            type: 'input',
-            validate(input: string): boolean {
-              return Boolean(input.trim());
-            }
-          }
-        ]);
-
-        await this.configManager.setItem('platform', answer.platform);
-        await this.configManager.setItem('apiKey', answer.apiKey);
-
-        this.success('Configuration successful');
+        await this.showInquirer();
       }
     }
+  }
+
+  private async showInquirer(): Promise<void> {
+    const answer = await inquirer.prompt([
+      {
+        choices: getAvailablePlatforms().map((platform) => ({
+          name: getPlatform(platform as unknown as Platform).name,
+          value: platform
+        })),
+        message: ConfigCommand.flags.platform.description,
+        name: 'platform',
+        type: 'list'
+      },
+      {
+        message: ConfigCommand.flags.apiKey.description,
+        name: 'apiKey',
+        type: 'input',
+        validate(input: string): boolean {
+          return Boolean(input.trim());
+        }
+      }
+    ]);
+
+    await this.configManager.setItem('platform', answer.platform);
+    await this.configManager.setItem('apiKey', answer.apiKey);
+
+    this.success('Configuration successful');
   }
 }
 
