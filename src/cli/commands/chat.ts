@@ -1,4 +1,4 @@
-import { AIMessage, HumanMessage } from '@langchain/core/messages';
+import { AIMessage, HumanMessage, SystemMessage } from '@langchain/core/messages';
 import chalk from 'chalk';
 import { ChatMessageHistory } from 'langchain/stores/message/in_memory';
 import readline from 'node:readline';
@@ -10,11 +10,13 @@ import BaseCommand from '../extends/command';
 
 enum PromptRole {
   AI = 'ai',
+  SYSTEM = 'system',
   USER = 'user'
 }
 
 const promptMessageMap = {
   [PromptRole.AI]: AIMessage,
+  [PromptRole.SYSTEM]: SystemMessage,
   [PromptRole.USER]: HumanMessage
 };
 const promptRoleDisplayMap = {
@@ -22,16 +24,15 @@ const promptRoleDisplayMap = {
     color: 'yellow',
     name: 'AI'
   },
+  [PromptRole.SYSTEM]: {
+    color: 'gray',
+    name: 'System'
+  },
   [PromptRole.USER]: {
     color: 'green',
     name: 'You'
   }
 } as const;
-
-const reader = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
 
 class ChatCommand extends BaseCommand {
   static args = {};
@@ -48,6 +49,7 @@ class ChatCommand extends BaseCommand {
     const config = await this.configManager.getAll();
 
     if (Object.keys(config).length > 0) {
+      const close = this.fullScreen();
       const detector = new AIGC({
         apiKey: config.apiKey,
         platform: config.platform as unknown as Platform
@@ -55,11 +57,21 @@ class ChatCommand extends BaseCommand {
       const aiDisplay = this.getDisplayContent(PromptRole.AI);
       let lastMessage = 'How can I help you today?';
 
+      process.stdout.write(
+        this.getDisplayContent(PromptRole.SYSTEM) + `Type ${chalk.cyan('exit')} to end this conversation\n`
+      );
       process.stdout.write(aiDisplay + lastMessage + '\n');
 
       // eslint-disable-next-line no-constant-condition
       while (true) {
         const userMessage = await this.getUserMessage();
+
+        if (userMessage === 'exit') {
+          close();
+
+          break;
+        }
+
         const stream = detector.chat(userMessage, await this.messages.getMessages());
 
         process.stdout.write(aiDisplay);
@@ -93,9 +105,17 @@ class ChatCommand extends BaseCommand {
 
   private getUserMessage(): Promise<string> {
     const userDisplay = this.getDisplayContent(PromptRole.USER);
+    const reader = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
 
-    return new Promise<string>((resolve) => {
-      reader.question(userDisplay, resolve);
+    return new Promise((resolve) => {
+      reader.question(userDisplay, (message) => {
+        resolve(message);
+
+        reader.close();
+      });
     });
   }
 }

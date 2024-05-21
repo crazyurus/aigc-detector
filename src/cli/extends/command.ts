@@ -1,4 +1,5 @@
 import { Command, loadHelpClass, type Config } from '@oclif/core';
+import ansiEscapes from 'ansi-escapes';
 import chalk from 'chalk';
 
 import ConfigManager from '../manager/config';
@@ -32,6 +33,18 @@ abstract class BaseCommand extends Command {
         exit: process.exitCode
       });
     }
+  }
+
+  protected fullScreen(): () => void {
+    const esc = '\u001B[';
+    const smcup = `${esc}?1049h`;
+    const rmcup = `${esc}?1049l`;
+
+    process.stdout.write(smcup + ansiEscapes.eraseScreen + ansiEscapes.cursorHide + ansiEscapes.cursorTo(0, 0));
+
+    return () => {
+      process.stdout.write(rmcup + ansiEscapes.cursorShow);
+    };
   }
 
   protected list(label: string, content: string): void {
