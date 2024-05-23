@@ -40,10 +40,10 @@ abstract class BaseCommand extends Command {
     const smcup = `${esc}?1049h`;
     const rmcup = `${esc}?1049l`;
 
-    process.stdout.write(smcup + ansiEscapes.eraseScreen + ansiEscapes.cursorHide + ansiEscapes.cursorTo(0, 0));
+    process.stdout.write(smcup + ansiEscapes.eraseScreen + ansiEscapes.cursorTo(0, 0));
 
     return () => {
-      process.stdout.write(rmcup + ansiEscapes.cursorShow);
+      process.stdout.write(rmcup);
     };
   }
 
