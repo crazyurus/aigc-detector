@@ -1,7 +1,3 @@
-import type { BaseLanguageModel } from '@langchain/core/language_models/base';
-
-import { ChatMinimax } from '@langchain/community/chat_models/minimax';
-
 import Platform from './base';
 
 class MiniMax extends Platform {
@@ -9,17 +5,7 @@ class MiniMax extends Platform {
 
   public name = 'MiniMax';
 
-  protected server = 'api.minimax.chat';
-
-  protected getChatModel(apiKey?: string, streaming = false): BaseLanguageModel {
-    return new ChatMinimax({
-      minimaxApiKey: apiKey,
-      minimaxGroupId: process.env.MINIMAX_GROUP_ID || '1782658868262748274',
-      model: this.model,
-      streaming,
-      temperature: this.temperature
-    });
-  }
+  protected server = 'api.minimax.chat/v1/text/chatcompletion_v2#';
 }
 
 export default MiniMax;

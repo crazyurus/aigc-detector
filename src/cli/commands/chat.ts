@@ -57,6 +57,7 @@ class ChatCommand extends BaseCommand {
       const aiDisplay = this.getDisplayContent(PromptRole.AI);
       let lastMessage = 'How can I help you today?';
 
+      console.warn = () => {};
       process.stdout.write(
         this.getDisplayContent(PromptRole.SYSTEM) + `Type ${chalk.cyan('exit')} to end this conversation\n`
       );
