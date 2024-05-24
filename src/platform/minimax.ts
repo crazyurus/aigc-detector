@@ -14,7 +14,7 @@ class MiniMax extends Platform {
   protected getChatModel(apiKey?: string, streaming = false): BaseLanguageModel {
     return new ChatMinimax({
       minimaxApiKey: apiKey,
-      minimaxGroupId: '1782658868262748274',
+      minimaxGroupId: process.env.MINIMAX_GROUP_ID || '1782658868262748274',
       model: this.model,
       streaming,
       temperature: this.temperature

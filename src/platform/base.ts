@@ -1,12 +1,9 @@
 import type { BaseLanguageModel } from '@langchain/core/language_models/base';
+import type { ChatPromptTemplate } from '@langchain/core/prompts';
 
-import { ChatPromptTemplate, HumanMessagePromptTemplate, SystemMessagePromptTemplate } from '@langchain/core/prompts';
 import { ChatOpenAI } from '@langchain/openai';
-import { LLMChain } from 'langchain/chains';
 
 import Stream from '../core/stream';
-
-type InvokeParameter = Parameters<InstanceType<typeof LLMChain>['invoke']>[0];
 
 abstract class Platform {
   protected temperature = 0.7;
@@ -24,30 +21,17 @@ abstract class Platform {
     });
   }
 
-  protected getPrompt(prompt: string): ChatPromptTemplate {
-    return ChatPromptTemplate.fromMessages([
-      SystemMessagePromptTemplate.fromTemplate(prompt),
-      HumanMessagePromptTemplate.fromTemplate('Here is what needs to be evaluated: \n{content}')
-    ]);
-  }
-
-  public async invoke(prompt: string, params: InvokeParameter, apiKey?: string): Promise<string> {
-    const promptTemplate = this.getPrompt(prompt);
-    const chain = new LLMChain({
-      llm: this.getChatModel(apiKey),
-      prompt: promptTemplate
-    });
+  public async invoke(prompt: ChatPromptTemplate, params: Record<string, unknown>, apiKey?: string): Promise<string> {
+    const chatModel = this.getChatModel(apiKey);
+    const chain = prompt.pipe(chatModel);
     const result = await chain.invoke(params);
 
     return result.text;
   }
 
-  public stream(prompt: string, params: InvokeParameter, apiKey?: string): Stream {
-    const promptTemplate = this.getPrompt(prompt);
-    const chain = new LLMChain({
-      llm: this.getChatModel(apiKey, true),
-      prompt: promptTemplate
-    });
+  public stream(prompt: ChatPromptTemplate, params: Record<string, unknown>, apiKey?: string): Stream {
+    const chatModel = this.getChatModel(apiKey, true);
+    const chain = prompt.pipe(chatModel);
     const stream = new Stream();
 
     chain

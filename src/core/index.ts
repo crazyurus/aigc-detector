@@ -1,5 +1,12 @@
 import type { BaseMessage } from '@langchain/core/messages';
 
+import {
+  ChatPromptTemplate,
+  HumanMessagePromptTemplate,
+  SystemMessagePromptTemplate,
+  MessagesPlaceholder
+} from '@langchain/core/prompts';
+
 import type Stream from './stream';
 
 import { PROMPT } from '../const';
@@ -24,19 +31,26 @@ export class AIGC {
     this.platform = (env.platform as unknown as Platform) || options.platform;
   }
 
-  public chat(content: string, messages: BaseMessage[]): Stream {
+  public chat(question: string, messages: BaseMessage[]): Stream {
     const platform = getPlatform(this.platform);
+    const prompt = ChatPromptTemplate.fromMessages([
+      SystemMessagePromptTemplate.fromTemplate(
+        'You are a helpful assistant. Answer all questions to the best of your ability.'
+      ),
+      new MessagesPlaceholder('messages'),
+      HumanMessagePromptTemplate.fromTemplate('{question}')
+    ]);
 
-    return platform.stream(
-      'You are a helpful assistant. Answer all questions to the best of your ability.',
-      { content, messages },
-      this.apiKey
-    );
+    return platform.stream(prompt, { messages, question }, this.apiKey);
   }
 
   public async detect(content: string): Promise<ReturnType<typeof getDetectResult>> {
     const platform = getPlatform(this.platform);
-    const result = await platform.invoke(PROMPT, { content }, this.apiKey);
+    const prompt = ChatPromptTemplate.fromMessages([
+      SystemMessagePromptTemplate.fromTemplate(PROMPT),
+      HumanMessagePromptTemplate.fromTemplate('Here is what needs to be evaluated: \n{content}')
+    ]);
+    const result = await platform.invoke(prompt, { content }, this.apiKey);
 
     return getDetectResult(result);
   }

@@ -5,7 +5,7 @@ import { ChatZhipuAI } from '@langchain/community/chat_models/zhipuai';
 import Platform from './base';
 
 class ZhiPu extends Platform {
-  protected model = 'glm-4';
+  protected model = 'glm-3-turbo';
 
   public name = '智谱清言';
 

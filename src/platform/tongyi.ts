@@ -5,11 +5,11 @@ import { ChatAlibabaTongyi } from '@langchain/community/chat_models/alibaba_tong
 import Platform from './base';
 
 class TongYi extends Platform {
-  protected model = 'qwen-max';
+  protected model = 'qwen-turbo';
 
   public name = '通义千问';
 
-  protected server = 'open.bigmodel.cn';
+  protected server = 'dashscope.aliyuncs.com';
 
   protected getChatModel(apiKey?: string, streaming = false): BaseLanguageModel {
     return new ChatAlibabaTongyi({
