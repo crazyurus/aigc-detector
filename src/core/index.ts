@@ -35,7 +35,7 @@ export class AIGC {
     const platform = getPlatform(this.platform);
     const prompt = ChatPromptTemplate.fromMessages([
       SystemMessagePromptTemplate.fromTemplate(
-        'You are a helpful assistant. Answer all questions to the best of your ability.'
+        'You are a helpful assistant. Answer all questions to the best of your ability.\nIf the user wants to end the conversation or exit the current chat command, directly reply to the user "$command:exit$"'
       ),
       new MessagesPlaceholder('messages'),
       HumanMessagePromptTemplate.fromTemplate('{question}')

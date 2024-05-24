@@ -1,4 +1,5 @@
 import { AIMessage, HumanMessage, SystemMessage } from '@langchain/core/messages';
+import ansiEscapes from 'ansi-escapes';
 import chalk from 'chalk';
 import { ChatMessageHistory } from 'langchain/stores/message/in_memory';
 import readline from 'node:readline';
@@ -59,26 +60,31 @@ class ChatCommand extends BaseCommand {
 
       console.warn = () => {};
       process.stdout.write(
-        this.getDisplayContent(PromptRole.SYSTEM) + `Type ${chalk.cyan('exit')} to end this conversation\n`
+        this.getDisplayContent(PromptRole.SYSTEM) +
+          `If you want to end this conversation, please tell the AI directly\n`
       );
       process.stdout.write(aiDisplay + lastMessage + '\n');
 
       // eslint-disable-next-line no-constant-condition
       while (true) {
         const userMessage = await this.getUserMessage();
-
-        if (userMessage === 'exit') {
-          close();
-
-          break;
-        }
-
         const stream = detector.chat(userMessage, await this.messages.getMessages());
 
         process.stdout.write(aiDisplay);
         stream.pipe(process.stdout);
 
         lastMessage = await stream.getData();
+
+        if (lastMessage === '$command:exit$') {
+          process.stdout.write(ansiEscapes.eraseLine + ansiEscapes.cursorLeft);
+          process.stdout.write(aiDisplay + 'Nice to chat with you. Bye~\n');
+
+          await this.wait(1000);
+
+          close();
+
+          break;
+        }
 
         process.stdout.write('\n');
 
