@@ -3,7 +3,7 @@
 // eslint-disable-next-line n/shebang
 import { execute } from '@oclif/core';
 
-import { initProxy } from './proxy';
+import { initProxy } from './proxy.js';
 
 initProxy();
 
