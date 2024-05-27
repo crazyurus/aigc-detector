@@ -61,7 +61,7 @@ class ChatCommand extends BaseCommand {
       console.warn = () => {};
       process.stdout.write(
         this.getDisplayContent(PromptRole.SYSTEM) +
-          `If you want to end this conversation, please tell the AI directly\n`
+          'If you want to end this conversation, please tell the AI directly\n'
       );
       process.stdout.write(aiDisplay + lastMessage + '\n');
 
@@ -86,10 +86,18 @@ class ChatCommand extends BaseCommand {
           break;
         }
 
-        process.stdout.write('\n');
-
         await this.addMessage(PromptRole.USER, userMessage);
         await this.addMessage(PromptRole.AI, lastMessage);
+
+        if (lastMessage === '$command:clear$') {
+          process.stdout.write(ansiEscapes.eraseLine + ansiEscapes.cursorLeft);
+          process.stdout.write(this.getDisplayContent(PromptRole.SYSTEM) + 'This is a new conversation.\n');
+          process.stdout.write(aiDisplay + 'How can I help you today?');
+
+          await this.messages.clear();
+        }
+
+        process.stdout.write('\n');
       }
     } else {
       this.showHelp();
