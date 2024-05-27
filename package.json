@@ -58,7 +58,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.24.4",
-    "@commitlint/cli": "^19.2.2",
+    "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@oclif/prettier-config": "^0.2.1",
     "@types/inquirer": "^9.0.7",
@@ -69,8 +69,9 @@
     "eslint-config-prettier": "^9.1.0",
     "glob": "^10.3.12",
     "husky": "^9.0.11",
-    "lint-staged": "^15.2.2",
+    "lint-staged": "^15.2.5",
     "oclif": "^4.8.5",
+    "prettier": "^3.2.5",
     "prettier-plugin-packagejson": "^2.5.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
@@ -78,5 +79,5 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "packageManager": "pnpm@9.1.2"
+  "packageManager": "pnpm@9.1.3"
 }
