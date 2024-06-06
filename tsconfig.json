@@ -6,7 +6,8 @@
     "rootDir": "src",
     "strict": true,
     "target": "ESNext",
-    "moduleResolution": "Bundler"
+    "moduleResolution": "Bundler",
+    "skipLibCheck": true
   },
   "include": ["./src/**/*"],
   "ts-node": {
