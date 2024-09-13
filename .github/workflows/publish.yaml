@@ -16,8 +16,8 @@ jobs:
         registry-url: 'https://registry.npmjs.org'
     - name: Install dependencies
       run: |
-        corepack install
-        corepack pnpm install --frozen-lockfile
+        corepack enable
+        pnpm install --frozen-lockfile
     - name: Build
       run: npm run build
     - name: Publish
